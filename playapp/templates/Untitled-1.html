@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AssWeCan</title>
+    <script src="p5.js"> alert('[close] СPisosо'); </script>
+</head>
+
+<body>
+<script>
+
+let button;
+function setup() {
+  createCanvas(displayWidth, displayHeight);
+  background(110);
+  button = createButton('Send Data');
+  button.center();
+  button.visible(false);
+  button.size(100, 20);
+  button.mousePressed(ClickOnMyButton);
+};
+
+let socket = new WebSocket("wss://javascript.info/article/websocket/demo/hello");
+
+function ClickOnMyButton() {
+    socket.send("1234");
+};
+
+socket.onopen = function(e) {
+  alert("[open] Соединение установлено");
+  alert("Отправляем данные на сервер");
+  var elem = document.getElementById("MyButton");
+  elem.style.visibility = "visible";
+};
+
+socket.onmessage = function(event) {
+  alert('[message] Данные получены с сервера');
+};
+
+socket.onclose = function(event) {
+  if (event.wasClean) {
+    alert('[close] Соединение закрыто');
+  } else {
+    alert('[close] Соединение прервано');
+  }
+};
+
+socket.onerror = function(error) {
+  alert('[error]');
+};
+
+
+
+
+</script>
+
+</body>
+</html>
