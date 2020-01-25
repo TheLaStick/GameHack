@@ -5,7 +5,7 @@ from django.shortcuts import render
 def play(request):
     if request.method == 'GET':
 
-        return render(request, '')
+        return render(request, 'JS-game')
     if request.method == 'POST':
         button1 = request.POST.get('')
         button2 = request.POST.get('')
